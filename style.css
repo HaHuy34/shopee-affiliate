@@ -542,3 +542,314 @@ footer {
     transform: translateY(0);
   }
 }
+<<<<<<< Updated upstream
+=======
+
+/* ====================================
+   MODAL - SLIDER MƯỢT MÀ, KHÔNG LAG 
+==================================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.modal:not(.hidden) {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 950px;
+  border-radius: 16px;
+  margin: 0 20px;
+  padding: 0;
+  z-index: 2;
+  overflow: hidden;
+  transform: scale(0.95) translateY(20px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  background: #000;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.modal:not(.hidden) .modal-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.close-btn:hover {
+  background: rgba(238, 77, 45, 0.9);
+  transform: scale(1.1) rotate(90deg);
+}
+
+/* EPISODE LIST (HASHTAGS) */
+.episode-list {
+  display: flex;
+  gap: 10px;
+  padding: 15px 65px 15px 20px; /* chừa không gian cho close-btn */
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 20;
+}
+.episode-list::-webkit-scrollbar {
+  display: none;
+}
+
+.episode-chip {
+  background: rgba(255, 255, 255, 0.1);
+  color: #adb5bd;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.episode-chip:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+.episode-chip.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 12px rgba(238, 77, 45, 0.4);
+}
+
+/* WRAPPER DUY TRÌ BỐ CỤC */
+.slider-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* CONTAINER DI CHUYỂN BẰNG TRANSFORM */
+.slider {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* SLIDE CON */
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  opacity: 0.4;
+  transform: scale(0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slide video {
+  width: 100%;
+  max-height: 85vh;
+  outline: none;
+  background: #000;
+  border-radius: 0; /* xóa border radius vì fullscreen layout nhìn tốt hơn */
+}
+
+/* Tiêu đề video nổi lên */
+.video-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: none;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 14px;
+  border-radius: 8px;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+/* Navigation Buttons */
+.nav-btn {
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  will-change: opacity, transform;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 28px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.nav-btn.prev {
+  left: 20px;
+}
+
+.nav-btn.next {
+  right: 20px;
+}
+
+/* Suggestion Box Khi Còn 3 Phút */
+.suggestion-box {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  background: rgba(15, 23, 42, 0.9);
+  color: white;
+  padding: 18px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 20;
+  animation: slideInRight 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.suggestion-box.hidden {
+  display: none;
+}
+
+.suggestion-box p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.suggestion-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.suggestion-actions button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+#suggestionNextBtn {
+  background: var(--primary);
+  color: white;
+}
+#suggestionNextBtn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+#suggestionCloseBtn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+#suggestionCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* .nav-btn {
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  will-change: opacity, transform;
+} */
+>>>>>>> Stashed changes
