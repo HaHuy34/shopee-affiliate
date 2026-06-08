@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review Anime 24/7</title>
+    <link
+      rel="shortcut icon"
+      href="https://scontent.fhan14-5.fna.fbcdn.net/v/t39.30808-6/709863882_122095903413352638_3815257389828996505_n.jpg?stp=dst-jpg_tt6&cstp=mx960x540&ctp=s960x540&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EYIuAjXzvSoQ7kNvwHxANOJ&_nc_oc=AdrQYw8iTlBUx3xcJICehyPJL6A1r7TsNbkAUZxbC2K-Rbf93yBvWo3Bi-ncRUv7Cxk&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&_nc_gid=QVInmydHDLdn9bftYl3aOA&_nc_ss=7b2a8&oh=00_Af8RPipTvB6OBBTOjF4e0hV7A1T5JSLUvpvAUZb7mC42Hw&oe=6A2C3FDD"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Abstract Background Elements -->
+    <div class="bg-elements">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+      <!-- Profile Header -->
+      <header class="profile">
+        <div class="avatar-container">
+          <img
+            src="https://scontent.fhan14-5.fna.fbcdn.net/v/t39.30808-6/709863882_122095903413352638_3815257389828996505_n.jpg?stp=dst-jpg_tt6&cstp=mx960x540&ctp=s960x540&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EYIuAjXzvSoQ7kNvwHxANOJ&_nc_oc=AdrQYw8iTlBUx3xcJICehyPJL6A1r7TsNbkAUZxbC2K-Rbf93yBvWo3Bi-ncRUv7Cxk&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&_nc_gid=QVInmydHDLdn9bftYl3aOA&_nc_ss=7b2a8&oh=00_Af8RPipTvB6OBBTOjF4e0hV7A1T5JSLUvpvAUZb7mC42Hw&oe=6A2C3FDD "
+            alt="Avatar"
+            class="avatar"
+          />
+          <button class="share-btn" aria-label="Share">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </button>
+        </div>
+
+        <h1 class="name">Review Anime 24/7</h1>
+        <p class="bio">Link phim bên dưới 👇</p>
+
+        <div class="db-timeline">
+          <h3 class="db-title">
+            <span class="db-icon">🐲</span> Trình tự xem Dragon Ball
+          </h3>
+          <div class="timeline-container">
+            <div class="timeline-item">
+              <div class="timeline-dot">1</div>
+              <div
+                class="timeline-content"
+                data-series="Dragon Ball (1986)"
+                data-episodes="153"
+              >
+                <div class="timeline-text">
+                  <h4>Dragon Ball (1986)</h4>
+                  <p>Khởi nguyên (153 tập)</p>
+                </div>
+                <div class="timeline-action-icon">🎬</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot">2</div>
+              <div
+                class="timeline-content"
+                data-series="Dragon Ball Z (1989)"
+                data-episodes="291"
+              >
+                <div class="timeline-text">
+                  <h4>Dragon Ball Z (1989)</h4>
+                  <p>Kỷ nguyên DBZ (291 tập)</p>
+                </div>
+                <div class="timeline-action-icon">🎬</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot">3</div>
+              <div
+                class="timeline-content"
+                data-series="Dragon Ball Super (2015)"
+                data-episodes="131"
+              >
+                <div class="timeline-text">
+                  <h4>Dragon Ball Super (2015)</h4>
+                  <p>Kỷ nguyên Thần (131 tập)</p>
+                </div>
+                <div class="timeline-action-icon">🎬</div>
+              </div>
+            </div>
+            <div class="timeline-item optional">
+              <div class="timeline-dot">4</div>
+              <div
+                class="timeline-content"
+                data-series="Dragon Ball GT / Daima"
+                data-episodes="64"
+              >
+                <div class="timeline-text">
+                  <h4>Dragon Ball GT / Daima</h4>
+                  <p>Ngoại truyện / Hậu truyện</p>
+                </div>
+                <div class="timeline-action-icon">🎬</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <button
+      id="musicToggleBtn"
+      class="floating-music-btn"
+      aria-label="Toggle Music"
+    >
+      <span class="music-icon">🔇</span>
+      <span class="music-text">Nhạc nền DBZ</span>
+    </button>
+    <audio id="bgMusic" loop>
+      <source
+        src="https://nu.vgmtreasurechest.com/soundtracks/dragon-ball-z-bgm/gyaevpoa/1-01.%20Makafushigi%20Adventure%21.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <script src="main.js"></script>
+  </body>
+</html>
