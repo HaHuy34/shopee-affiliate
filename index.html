@@ -9,7 +9,7 @@
       href="https://scontent.fhan14-5.fna.fbcdn.net/v/t39.30808-6/709863882_122095903413352638_3815257389828996505_n.jpg?stp=dst-jpg_tt6&cstp=mx960x540&ctp=s960x540&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EYIuAjXzvSoQ7kNvwHxANOJ&_nc_oc=AdrQYw8iTlBUx3xcJICehyPJL6A1r7TsNbkAUZxbC2K-Rbf93yBvWo3Bi-ncRUv7Cxk&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&_nc_gid=QVInmydHDLdn9bftYl3aOA&_nc_ss=7b2a8&oh=00_Af8RPipTvB6OBBTOjF4e0hV7A1T5JSLUvpvAUZb7mC42Hw&oe=6A2C3FDD"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <!-- Abstract Background Elements -->
@@ -23,7 +23,7 @@
       <header class="profile">
         <div class="avatar-container">
           <img
-            src="https://scontent.fhan14-5.fna.fbcdn.net/v/t39.30808-6/709863882_122095903413352638_3815257389828996505_n.jpg?stp=dst-jpg_tt6&cstp=mx960x540&ctp=s960x540&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EYIuAjXzvSoQ7kNvwHxANOJ&_nc_oc=AdrQYw8iTlBUx3xcJICehyPJL6A1r7TsNbkAUZxbC2K-Rbf93yBvWo3Bi-ncRUv7Cxk&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&_nc_gid=QVInmydHDLdn9bftYl3aOA&_nc_ss=7b2a8&oh=00_Af8RPipTvB6OBBTOjF4e0hV7A1T5JSLUvpvAUZb7mC42Hw&oe=6A2C3FDD "
+            src="https://scontent.fhan14-5.fna.fbcdn.net/v/t39.30808-6/709863882_122095903413352638_3815257389828996505_n.jpg?stp=dst-jpg_tt6&cstp=mx960x540&ctp=s960x540&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EYIuAjXzvSoQ7kNvwHxANOJ&_nc_oc=AdrQYw8iTlBUx3xcJICehyPJL6A1r7TsNbkAUZxbC2K-Rbf93yBvWo3Bi-ncRUv7Cxk&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&_nc_gid=QVInmydHDLdn9bftYl3aOA&_nc_ss=7b2a8&oh=00_Af8RPipTvB6OBBTOjF4e0hV7A1T5JSLUvpvAUZb7mC42Hw&oe=6A2C3FDD"
             alt="Avatar"
             class="avatar"
           />
@@ -116,7 +116,9 @@
         </div>
       </header>
     </div>
+
     <button
+      style="display: none"
       id="musicToggleBtn"
       class="floating-music-btn"
       aria-label="Toggle Music"
@@ -124,12 +126,38 @@
       <span class="music-icon">🔇</span>
       <span class="music-text">Nhạc nền DBZ</span>
     </button>
-    <audio id="bgMusic" loop>
-      <source
-        src="https://nu.vgmtreasurechest.com/soundtracks/dragon-ball-z-bgm/gyaevpoa/1-01.%20Makafushigi%20Adventure%21.mp3"
-        type="audio/mpeg"
-      />
-    </audio>
-    <script src="main.js"></script>
+    <audio id="bgMusic" loop></audio>
+
+    <!-- SLIDE MODAL -->
+    <div id="videoModal" class="modal hidden">
+      <div class="modal-overlay"></div>
+
+      <div class="modal-content">
+        <button id="closeModal" class="close-btn">×</button>
+
+        <!-- Episode List Container (Hashtags) -->
+        <div id="episodeList" class="episode-list"></div>
+
+        <div class="slider-wrapper">
+          <div class="slider" id="sliderContainer">
+            <!-- JS sẽ render video vào đây -->
+          </div>
+        </div>
+
+        <button id="prevBtn" class="nav-btn prev">‹</button>
+        <button id="nextBtn" class="nav-btn next">›</button>
+
+        <!-- Đề xuất video theo thời gian -->
+        <div id="suggestionBox" class="suggestion-box hidden">
+          <p>Sắp hết video! Chuyển sang tập tiếp theo?</p>
+          <div class="suggestion-actions">
+            <button id="suggestionNextBtn">Chuyển ngay</button>
+            <button id="suggestionCloseBtn">Để sau</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
   </body>
 </html>

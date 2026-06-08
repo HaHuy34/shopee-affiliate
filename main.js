@@ -1,85 +1,3 @@
-<<<<<<< Updated upstream
-fetch("/api/visit");
-document.addEventListener("DOMContentLoaded", () => {
-  // Timeline Click Logic (Placeholder behavior since episodes are removed)
-  const timelineItems = document.querySelectorAll(".timeline-content");
-
-  timelineItems.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      const seriesName = item.getAttribute("data-series") || "Dragon Ball";
-      alert(`Tính năng đang được ad update`);
-      // Provide a minimal action
-      // window.open('https://shopee.vn', '_blank', 'noopener,noreferrer');
-    });
-  });
-});
-const btn = document.getElementById("musicToggleBtn");
-const bgMusic = document.getElementById("bgMusic");
-
-bgMusic.volume = 1.0;
-
-let isPlaying = false;
-let hasUserInteracted = false;
-
-// 🎧 phát nhạc từ giây 3
-function startMusicFrom3() {
-  bgMusic.currentTime = 3;
-
-  bgMusic
-    .play()
-    .then(() => {
-      isPlaying = true;
-      updateIcon();
-    })
-    .catch((err) => console.log("Play failed:", err));
-}
-
-// 🔘 update icon
-function updateIcon() {
-  btn.innerHTML = isPlaying
-    ? `<span class="music-icon">⏸</span>`
-    : `<span class="music-icon">🔊</span>`;
-}
-
-// 🌍 auto start (chỉ chạy 1 lần duy nhất)
-function autoStart() {
-  if (hasUserInteracted) return;
-  hasUserInteracted = true;
-
-  startMusicFrom3();
-
-  window.removeEventListener("click", autoStart);
-  window.removeEventListener("scroll", autoStart);
-  window.removeEventListener("keydown", autoStart);
-  window.removeEventListener("touchstart", autoStart);
-}
-
-// 🔘 toggle button (quan trọng: KHÔNG reset currentTime nữa)
-btn.addEventListener("click", () => {
-  hasUserInteracted = true; // chặn autoStart sau khi user dùng nút
-
-  if (isPlaying) {
-    bgMusic.pause();
-    isPlaying = false;
-  } else {
-    bgMusic.play().catch((err) => console.log(err));
-    isPlaying = true;
-  }
-
-  updateIcon();
-});
-
-// 🌍 events kích hoạt auto play
-window.addEventListener("click", autoStart);
-window.addEventListener("scroll", autoStart);
-window.addEventListener("keydown", autoStart);
-window.addEventListener("touchstart", autoStart);
-
-// init
-updateIcon();
-
-// LINK SHOPEE
-=======
 // =========================
 // VIDEO DATA
 // =========================
@@ -96,14 +14,16 @@ const videoData = {
     },
     {
       name: "Tập 138",
-      src: "https://www.dailymotion.com/embed/video/k65OrdN9vWOhlDGvOls",
+      src: "https://www.dailymotion.com/embed/video/k9GGmqwuKmxleUGvJqK",
     },
   ],
   "Dragon Ball Super (2015)": [],
   "Dragon Ball GT / Daima": [],
 };
->>>>>>> Stashed changes
 
+// =========================
+// SHOPEE LINKS
+// =========================
 const shopeeLinks = {
   "Dragon Ball (1986)": "https://s.shopee.vn/1gG50bIPVR",
   "Dragon Ball Z (1989)": "https://s.shopee.vn/70HbMQ5oaE",
@@ -111,16 +31,38 @@ const shopeeLinks = {
   "Dragon Ball GT / Daima": "https://s.shopee.vn/7KuRl3r9pZ",
 };
 
-document.querySelectorAll(".timeline-content").forEach((item) => {
-  item.addEventListener("click", () => {
+// =========================
+// STATE
+// =========================
+let currentIndex = 0;
+let slides = [];
+
+// =========================
+// DOM READY
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  const timelineItems = document.querySelectorAll(".timeline-content");
+
+  // Tự động gắn badge "New" nhấp nháy cho các phần có chứa video
+  timelineItems.forEach((item) => {
     const series = item.getAttribute("data-series");
+    if (videoData[series] && videoData[series].length > 0) {
+      const h4 = item.querySelector("h4");
+      if (h4) {
+        const badge = document.createElement("span");
+        badge.className = "badge-new";
+        badge.textContent = "New";
+        h4.appendChild(badge);
+      }
+    }
+  });
 
-    const link = shopeeLinks[series];
+  const modal = document.getElementById("videoModal");
+  const sliderContainer = document.getElementById("sliderContainer");
+  const episodeList = document.getElementById("episodeList");
+  const closeBtn = document.getElementById("closeModal");
+  const overlay = document.querySelector(".modal-overlay");
 
-<<<<<<< Updated upstream
-    if (link) {
-      window.open(link, "_blank"); // mở tab mới Shopee
-=======
   const nextBtn = document.getElementById("nextBtn");
   const prevBtn = document.getElementById("prevBtn");
 
@@ -193,8 +135,6 @@ document.querySelectorAll(".timeline-content").forEach((item) => {
       const iframe = document.createElement("iframe");
 
       iframe.src = v.src;
-      iframe.dataset.src = v.src; // lưu link gốc
-
       iframe.width = "100%";
       iframe.height = "500";
       iframe.frameBorder = "0";
@@ -225,8 +165,6 @@ document.querySelectorAll(".timeline-content").forEach((item) => {
     updateSlide();
 
     modal.classList.remove("hidden");
-
-    showNavButtons();
   }
 
   // =========================
@@ -235,21 +173,9 @@ document.querySelectorAll(".timeline-content").forEach((item) => {
   function closeModal() {
     modal.classList.add("hidden");
 
-    document.querySelectorAll("#sliderContainer iframe").forEach((iframe) => {
-      iframe.src = "about:blank";
+    document.querySelectorAll("#sliderContainer iframe").forEach((frame) => {
+      frame.src = frame.src;
     });
-
-    clearTimeout(navTimeout);
-
-    if (prevBtn) {
-      prevBtn.style.opacity = "0";
-      prevBtn.style.pointerEvents = "none";
-    }
-
-    if (nextBtn) {
-      nextBtn.style.opacity = "0";
-      nextBtn.style.pointerEvents = "none";
-    }
   }
 
   closeBtn?.addEventListener("click", closeModal);
@@ -262,29 +188,19 @@ document.querySelectorAll(".timeline-content").forEach((item) => {
     sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
 
     slides.forEach((slide, i) => {
-      const iframe = slide.querySelector("iframe");
-
       if (i === currentIndex) {
         slide.classList.add("active");
-
-        // Chỉ load video đang xem
-        if (
-          iframe &&
-          (iframe.src === "about:blank" || iframe.src.endsWith("about:blank"))
-        ) {
-          iframe.src = iframe.dataset.src;
-        }
       } else {
         slide.classList.remove("active");
 
-        // Tắt hoàn toàn video không xem
+        const iframe = slide.querySelector("iframe");
+
         if (iframe) {
-          iframe.src = "about:blank";
+          iframe.src = iframe.src;
         }
       }
     });
 
-    // Active hashtag
     const chips = episodeList.querySelectorAll(".episode-chip");
 
     chips.forEach((chip, i) => {
@@ -298,21 +214,15 @@ document.querySelectorAll(".timeline-content").forEach((item) => {
         });
       }
     });
-    showNavButtons();
-    // Prev button
-    // if (prevBtn) {
-    //   prevBtn.style.opacity = currentIndex === 0 ? "0" : "1";
 
-    //   prevBtn.style.pointerEvents = currentIndex === 0 ? "none" : "auto";
-    // }
+    prevBtn.style.opacity = currentIndex === 0 ? "0" : "1";
 
-    // // Next button
-    // if (nextBtn) {
-    //   nextBtn.style.opacity = currentIndex === slides.length - 1 ? "0" : "1";
+    prevBtn.style.pointerEvents = currentIndex === 0 ? "none" : "auto";
 
-    //   nextBtn.style.pointerEvents =
-    //     currentIndex === slides.length - 1 ? "none" : "auto";
-    // }
+    nextBtn.style.opacity = currentIndex === slides.length - 1 ? "0" : "1";
+
+    nextBtn.style.pointerEvents =
+      currentIndex === slides.length - 1 ? "none" : "auto";
   }
   // =========================
   // NEXT / PREV BUTTONS
@@ -378,62 +288,12 @@ document.querySelectorAll(".timeline-content").forEach((item) => {
     if (isPlaying) {
       bgMusic?.pause();
       isPlaying = false;
->>>>>>> Stashed changes
     } else {
-      console.log("Không tìm thấy link cho:", series);
+      bgMusic?.play();
+      isPlaying = true;
     }
+    updateIcon();
   });
-});
 
-// =========================
-// AUTO SHOW/HIDE NAV BUTTONS
-// =========================
-let navTimeout;
-
-function showNavButtons() {
-  clearTimeout(navTimeout);
-
-  // Hiện nút hợp lệ
-  if (prevBtn) {
-    if (currentIndex > 0) {
-      prevBtn.style.opacity = "1";
-      prevBtn.style.pointerEvents = "auto";
-    } else {
-      prevBtn.style.opacity = "0";
-      prevBtn.style.pointerEvents = "none";
-    }
-  }
-
-  if (nextBtn) {
-    if (currentIndex < slides.length - 1) {
-      nextBtn.style.opacity = "1";
-      nextBtn.style.pointerEvents = "auto";
-    } else {
-      nextBtn.style.opacity = "0";
-      nextBtn.style.pointerEvents = "none";
-    }
-  }
-
-  // Sau 3s tự ẩn
-  navTimeout = setTimeout(() => {
-    if (prevBtn) {
-      prevBtn.style.opacity = "0";
-      prevBtn.style.pointerEvents = "none";
-    }
-
-    if (nextBtn) {
-      nextBtn.style.opacity = "0";
-      nextBtn.style.pointerEvents = "none";
-    }
-  }, 3000);
-}
-
-const modalContent = document.querySelector(".modal-content");
-
-["mousemove", "click", "touchstart", "touchmove"].forEach((event) => {
-  modalContent?.addEventListener(event, () => {
-    if (!modal.classList.contains("hidden")) {
-      showNavButtons();
-    }
-  });
+  updateIcon();
 });
