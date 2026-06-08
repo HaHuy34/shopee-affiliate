@@ -1,3 +1,4 @@
+fetch("/api/visit");
 document.addEventListener("DOMContentLoaded", () => {
   // Timeline Click Logic (Placeholder behavior since episodes are removed)
   const timelineItems = document.querySelectorAll(".timeline-content");
