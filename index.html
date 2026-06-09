@@ -9,10 +9,61 @@
       href="https://scontent.fhan14-5.fna.fbcdn.net/v/t39.30808-6/709863882_122095903413352638_3815257389828996505_n.jpg?stp=dst-jpg_tt6&cstp=mx960x540&ctp=s960x540&_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=EYIuAjXzvSoQ7kNvwHxANOJ&_nc_oc=AdrQYw8iTlBUx3xcJICehyPJL6A1r7TsNbkAUZxbC2K-Rbf93yBvWo3Bi-ncRUv7Cxk&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&_nc_gid=QVInmydHDLdn9bftYl3aOA&_nc_ss=7b2a8&oh=00_Af8RPipTvB6OBBTOjF4e0hV7A1T5JSLUvpvAUZb7mC42Hw&oe=6A2C3FDD"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      if (localStorage.getItem("theme") === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    </script>
   </head>
   <body>
-    <!-- Abstract Background Elements -->
+    <!-- NimeHub Header -->
+    <header id="mainHeader" class="header">
+      <div class="header-container">
+        <div class="logo" onclick="goHome()" style="cursor: pointer">
+          Review Anime<span> 24/7</span>
+        </div>
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+          <svg
+            class="sun-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg
+            class="moon-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
     <div class="bg-elements">
       <div class="blob blob-1"></div>
       <div class="blob blob-2"></div>
@@ -28,23 +79,29 @@
             class="avatar"
           />
           <button class="share-btn" aria-label="Share">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+            <a
+              target="_blank"
+              style="text-decoration: none"
+              href="https://www.facebook.com/profile.php?id=61590457230547"
             >
-              <circle cx="18" cy="5" r="3"></circle>
-              <circle cx="6" cy="12" r="3"></circle>
-              <circle cx="18" cy="19" r="3"></circle>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+            </a>
           </button>
         </div>
 
@@ -117,47 +174,19 @@
       </header>
     </div>
 
-    <button
-      style="display: none"
-      id="musicToggleBtn"
-      class="floating-music-btn"
-      aria-label="Toggle Music"
-    >
-      <span class="music-icon">🔇</span>
-      <span class="music-text">Nhạc nền DBZ</span>
+    <button id="backToTop" class="back-to-top" title="Lên đầu trang">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
     </button>
-    <audio id="bgMusic" loop></audio>
 
-    <!-- SLIDE MODAL -->
-    <div id="videoModal" class="modal hidden">
-      <div class="modal-overlay"></div>
-
-      <div class="modal-content">
-        <button id="closeModal" class="close-btn">×</button>
-
-        <!-- Episode List Container (Hashtags) -->
-        <div id="episodeList" class="episode-list"></div>
-
-        <div class="slider-wrapper">
-          <div class="slider" id="sliderContainer">
-            <!-- JS sẽ render video vào đây -->
-          </div>
-        </div>
-
-        <button id="prevBtn" class="nav-btn prev">‹</button>
-        <button id="nextBtn" class="nav-btn next">›</button>
-
-        <!-- Đề xuất video theo thời gian -->
-        <div id="suggestionBox" class="suggestion-box hidden">
-          <p>Sắp hết video! Chuyển sang tập tiếp theo?</p>
-          <div class="suggestion-actions">
-            <button id="suggestionNextBtn">Chuyển ngay</button>
-            <button id="suggestionCloseBtn">Để sau</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script src="./main.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
